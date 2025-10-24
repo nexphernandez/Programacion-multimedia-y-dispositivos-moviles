@@ -12,6 +12,7 @@ export function Square({ val, onPress }: { val: string; onPress: () => void }) {
 const styles = StyleSheet.create({
   square: {
     width: '33.333%',
+    height: '33.333%',
     aspectRatio: 1,        
     justifyContent: 'center',
     alignItems: 'center',
