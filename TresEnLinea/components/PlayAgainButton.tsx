@@ -11,7 +11,7 @@ export function PlayAgainButton({ onReset }: { onReset: () => void }) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#e74c3c',
+    backgroundColor: 'green',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,

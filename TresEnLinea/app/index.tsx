@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Juego de Tic-Tac-Toe</Text>
+      <Text style={styles.title}>Tres en Linea</Text>
       <Game />
     </View>
   );

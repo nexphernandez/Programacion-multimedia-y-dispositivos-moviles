@@ -24,7 +24,7 @@ export function Board({
 
 const styles = StyleSheet.create({
   boardContainer: {
-    width: 350,           
+    width: 240.5,           
     aspectRatio: 1,       
     flexDirection: 'row',
     flexWrap: 'wrap',
