@@ -1,19 +1,32 @@
-import { Text, View } from "react-native";
+import { Game } from '@/components/Game';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import MyButton from "@/components/Buttons";
-export default function Index() {
+export default function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-      <div>
-        <MyButton />
-      </div>
+    <View style={styles.container}>
+      <Text style={styles.title}>Juego de Tic-Tac-Toe</Text>
+      <Game />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: '800',
+    color: '#2c3e50',
+    marginBottom: 40,
+  },
+  footer: {
+    marginTop: 40,
+    fontSize: 16,
+    color: '#7f8c8d',
+  },
+});
