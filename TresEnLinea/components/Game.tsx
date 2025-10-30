@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Board } from '@/components/Board';
 import { PlayAgainButton } from '@/components/PlayAgainButton';
 
-function calculateWinner(squares: string[]): string | null {
+function calculateWinner(squares: string[], numero: number): string | null {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -24,11 +24,12 @@ function calculateWinner(squares: string[]): string | null {
   return null;
 }
 
-export function Game() {
-  const [squares, setSquares] = React.useState(Array(9).fill(''));
+
+export function Game({ numero }: { numero: number }) {
+  const [squares, setSquares] = React.useState(Array(numero * numero).fill(''));
   const [xIsNext, setXIsNext] = React.useState(true);
 
-  const winner = calculateWinner(squares);
+  const winner = calculateWinner(squares,numero);
   
   const isDraw = !winner && squares.every(square => square !== '');
 
