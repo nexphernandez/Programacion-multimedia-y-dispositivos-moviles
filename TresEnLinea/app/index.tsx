@@ -23,6 +23,12 @@ export default function App() {
         <TouchableOpacity style={styles.button} onPress={()=>cambiarButton(5)}>
           <Text style={styles.buttonText}>Cinco en linea</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={()=>cambiarButton(6)}>
+          <Text style={styles.buttonText}>Seis en linea</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={()=>cambiarButton(7)}>
+          <Text style={styles.buttonText}>Siete en linea</Text>
+        </TouchableOpacity>
       </View>
     );
   }else{

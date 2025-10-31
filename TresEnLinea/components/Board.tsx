@@ -4,10 +4,12 @@ import { Square } from './Square';
 
 export function Board({ 
   squares, 
-  onSquareClick 
+  onSquareClick,
+  boardSize
 }: { 
   squares: string[]; 
   onSquareClick: (index: number) => void;
+  boardSize: number;
 }) {
   return (
     <View style={styles.boardContainer}>
@@ -16,6 +18,7 @@ export function Board({
           key={index} 
           val={value} 
           onPress={() => onSquareClick(index)}
+          numerito={boardSize}
         />
       ))}
     </View>
@@ -24,7 +27,7 @@ export function Board({
 
 const styles = StyleSheet.create({
   boardContainer: {
-    width: '100%',           
+    width: '100%',       
     aspectRatio: 1,       
     flexDirection: 'row',
     flexWrap: 'wrap',
