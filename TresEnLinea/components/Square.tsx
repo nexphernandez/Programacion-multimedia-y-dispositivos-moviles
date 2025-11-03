@@ -1,51 +1,42 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, ViewStyle, DimensionValue, LayoutChangeEvent } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, ViewStyle, DimensionValue, TextStyle } from 'react-native';
 
-function misEstilos({ numerito }: { numerito: number }): ViewStyle {
+interface SquareProps {
+  val: string | null | undefined;
+  onPress: () => void;
+  numerito: number;
+  isWinning?: boolean;
+}
+
+export function Square({ val, onPress, numerito, isWinning = false }: SquareProps) {
   const widthPercentage = `${100 / numerito}%` as DimensionValue;
-  
-  return {
+
+  const squareStyle: ViewStyle = {
     width: widthPercentage,
     height: widthPercentage,
-    aspectRatio: 1, 
+    aspectRatio: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: isWinning ? 'lightgreen' : '#fff',
     borderRightWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#ccc',
   };
+
+  // Usamos StyleSheet para el estilo de texto
+  const textStyle: TextStyle = styles.squareText;
+
+  return (
+    <TouchableOpacity style={squareStyle} onPress={onPress} activeOpacity={0.7}>
+      <Text style={textStyle}>{val || ''}</Text>
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({
   squareText: {
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#2c3e50',
-  }
+  } as TextStyle, // aseguramos que TypeScript lo acepte
 });
-
-export function Square({ val, onPress, numerito }: { val: string; onPress: () => void; numerito: number }) {
-  const [squareSize, setSquareSize] = useState(0);
-
-  const onLayout = (event: LayoutChangeEvent) => {
-    const { width } = event.nativeEvent.layout;
-    setSquareSize(width * 0.6); 
-  };
-
-  const dynamicSquareStyle = misEstilos({ numerito: numerito });
-  
-  const dynamicTextStyle = {
-    fontSize: squareSize > 0 ? squareSize : 60, 
-  };
-
-  return (
-    <TouchableOpacity 
-      style={dynamicSquareStyle} 
-      onPress={onPress}
-      onLayout={onLayout} 
-    >
-      {/* Combinamos el estilo base con el estilo dinámico del texto */}
-      <Text style={[styles.squareText, dynamicTextStyle]}>{val}</Text>
-    </TouchableOpacity>
-  );
-}
