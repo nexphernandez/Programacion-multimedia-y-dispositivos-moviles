@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, ViewStyle, DimensionValue, TextStyle } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View, ViewStyle, DimensionValue, TextStyle, Platform } from 'react-native';
 
 interface SquareProps {
   val: string | null | undefined;
@@ -21,15 +21,32 @@ export function Square({ val, onPress, numerito, isWinning = false }: SquareProp
     borderRightWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#ccc',
+    // Propiedades específicas para web
+    ...(Platform.OS === 'web' && {
+      // @ts-ignore
+      touchAction: 'manipulation',
+      userSelect: 'none',
+      WebkitTapHighlightColor: 'transparent',
+      cursor: 'pointer',
+    }),
   };
 
-  // Usamos StyleSheet para el estilo de texto
-  const textStyle: TextStyle = styles.squareText;
+  const textStyle: TextStyle = {
+    ...styles.squareText,
+    // Propiedades específicas para web
+    ...(Platform.OS === 'web' && {
+      // @ts-ignore
+      userSelect: 'none',
+      pointerEvents: 'none',
+    }),
+  };
 
   return (
-    <TouchableOpacity style={squareStyle} onPress={onPress} activeOpacity={0.7}>
-      <Text style={textStyle}>{val || ''}</Text>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={squareStyle}>
+        <Text style={textStyle}>{val || ''}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -38,5 +55,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#2c3e50',
-  } as TextStyle, // aseguramos que TypeScript lo acepte
+  } as TextStyle,
 });

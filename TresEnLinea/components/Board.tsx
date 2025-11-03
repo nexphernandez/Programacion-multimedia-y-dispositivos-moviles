@@ -11,7 +11,7 @@ interface BoardProps {
 
 export function Board({ squares, onSquareClick, boardSize, winningLine = [] }: BoardProps) {
   return (
-    <View style={styles.boardContainer}>
+    <View style={styles.boardContainer} pointerEvents="box-none">
       {squares.map((val, idx) => (
         <Square
           key={idx}
@@ -34,5 +34,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#333',
     backgroundColor: '#fff',
+    touchAction: 'manipulation',
+    userSelect: 'none',
   },
 });

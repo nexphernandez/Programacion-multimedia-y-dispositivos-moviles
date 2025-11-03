@@ -13,6 +13,11 @@ interface WinnerInfo {
 
 type RecordType = { X: number; O: number };
 
+interface GameProps {
+  numero: number;
+  onBack: () => void; // callback para el botón Atrás
+}
+
 function calculateWinner(squares: string[], n: number): WinnerInfo | null {
   const lines: number[][] = [];
 
@@ -46,13 +51,12 @@ function calculateWinner(squares: string[], n: number): WinnerInfo | null {
     if (line.every((idx) => squares[idx] === first)) return { winner: first as Player, line };
   }
 
-  // empate
   if (squares.every((cell) => cell)) return { winner: 'DRAW', line: [] };
 
   return null;
 }
 
-export function Game({ numero }: { numero: number }) {
+export function Game({ numero, onBack }: GameProps) {
   const [squares, setSquares] = useState<string[]>(Array(numero * numero).fill(''));
   const [xIsNext, setXIsNext] = useState(true);
   const [winnerInfo, setWinnerInfo] = useState<WinnerInfo | null>(null);
@@ -71,7 +75,6 @@ export function Game({ numero }: { numero: number }) {
     if (result) {
       setWinnerInfo(result);
 
-      // Solo actualizar record si es X u O
       if (result.winner === 'X' || result.winner === 'O') {
         const winnerKey: Player = result.winner;
         setRecord((prev) => ({ ...prev, [winnerKey]: prev[winnerKey] + 1 }));
@@ -112,11 +115,23 @@ export function Game({ numero }: { numero: number }) {
       />
 
       <PlayAgainButton onReset={() => handleReset(true)} />
+
       <TouchableOpacity
         style={[styles.button, { backgroundColor: 'orange' }]}
         onPress={() => setRecord({ X: 0, O: 0 })}
+        delayPressIn={0}
+        activeOpacity={0.7}
       >
-        <Text style={styles.buttonText}>Reiniciar Estadisticas</Text>
+        <Text style={styles.buttonText}>Reiniciar Estadísticas</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: 'blue' }]}
+        onPress={onBack}
+        delayPressIn={0}
+        activeOpacity={0.7}
+      >
+        <Text style={styles.buttonText}>Atrás</Text>
       </TouchableOpacity>
     </View>
   );

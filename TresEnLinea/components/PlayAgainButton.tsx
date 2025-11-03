@@ -3,7 +3,12 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export function PlayAgainButton({ onReset }: { onReset: () => void }) {
   return (
-    <TouchableOpacity style={styles.button} onPress={onReset}>
+    <TouchableOpacity 
+      style={styles.button} 
+      onPress={onReset}
+      delayPressIn={0}
+      activeOpacity={0.7}
+    >
       <Text style={styles.buttonText}>Reiniciar Juego</Text>
     </TouchableOpacity>
   );
