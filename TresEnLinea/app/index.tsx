@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Game } from '../components/Game';
+import { fetchDevice, fetchAddDevice } from "@/lib/Conexion";
 
 export default function Index() {
   const [numero, setNumero] = useState<number | null>(null);
+
+  useEffect(() =>{
+    const id = fetchAddDevice();
+  })
 
   if (numero !== null) {
     return <Game numero={numero} onBack={() => setNumero(null)} />;
