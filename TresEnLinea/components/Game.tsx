@@ -15,7 +15,7 @@ type RecordType = { X: number; O: number };
 
 interface GameProps {
   numero: number;
-  onBack: () => void; // callback para el botón Atrás
+  onBack: () => void; 
 }
 
 function calculateWinner(squares: string[], n: number): WinnerInfo | null {

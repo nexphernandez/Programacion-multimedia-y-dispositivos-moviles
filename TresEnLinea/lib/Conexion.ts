@@ -1,6 +1,12 @@
 
 const url: string = "http://127.0.0.1:5000/"
 
+interface Stats{
+  wins : string;
+  losses : string;
+  ratio : string;
+}
+
 export async function fetchDevice() {
     try {
         const res = await fetch(`${url}devices`);
@@ -8,7 +14,7 @@ export async function fetchDevice() {
             throw new Error(res.status === 404 ? "Dispositivo no encontrado" : "Error en la solicitud");
         }
         const data = await res.json();
-        console.log('Respuesta',data);
+        console.log('Respuesta', data);
     } catch (error) {
         console.error('Error', error);
     }
@@ -24,10 +30,25 @@ export async function fetchAddDevice() {
             body: JSON.stringify({})
         });
         const data = await res.json();
-        console.log(data.device_id);        
-        console.log('Respuesta',data)
+        console.log(data.device_id);
+        console.log('Respuesta', data)
         return data.device_id;
     } catch (error) {
-        console.log('Error',error);
+        console.log('Error', error);
+    }
+}
+
+export async function fetchStats(id: string): Promise<Stats> {
+    try {
+        const response = await fetch(`${url}devices/${id}/info`)
+        if (!response.ok) {
+            throw new Error(response.status === 404 ? "Dispositivo no encontrado" : "Error en la solicitud");
+        }
+        const data: Stats = await response.json();
+        console.log('Respuesta', data);
+        return data ;
+    } catch (error) {
+        console.error('Error', error);
+        throw error;
     }
 }

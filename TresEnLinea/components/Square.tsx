@@ -21,9 +21,7 @@ export function Square({ val, onPress, numerito, isWinning = false }: SquareProp
     borderRightWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#ccc',
-    // Propiedades específicas para web
     ...(Platform.OS === 'web' && {
-      // @ts-ignore
       touchAction: 'manipulation',
       userSelect: 'none',
       WebkitTapHighlightColor: 'transparent',
@@ -33,9 +31,7 @@ export function Square({ val, onPress, numerito, isWinning = false }: SquareProp
 
   const textStyle: TextStyle = {
     ...styles.squareText,
-    // Propiedades específicas para web
     ...(Platform.OS === 'web' && {
-      // @ts-ignore
       userSelect: 'none',
       pointerEvents: 'none',
     }),

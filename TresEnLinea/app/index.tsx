@@ -6,9 +6,18 @@ import { fetchDevice, fetchAddDevice } from "@/lib/Conexion";
 export default function Index() {
   const [numero, setNumero] = useState<number | null>(null);
 
+  const [id,setId] = React.useState(false);
+
   useEffect(() =>{
-    const id = fetchAddDevice();
-  })
+    if (id) return;
+    const fetchData = async () => {
+
+      const deviceId = await fetchAddDevice();
+      setId(deviceId);
+    };
+
+    fetchData();
+  });
 
   if (numero !== null) {
     return <Game numero={numero} onBack={() => setNumero(null)} />;
