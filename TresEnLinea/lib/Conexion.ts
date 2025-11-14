@@ -90,3 +90,78 @@ export async function fetchSearchMatch(device_id: string, boardSize: number){
         throw error;
     }
 }
+
+
+export async function fetchWaitingStatus(id: string) {
+  try {
+    const res = await fetch(`${url}matches/waiting-status?device_id=${id}`);
+    
+    if (!res.ok) {
+      throw new Error(res.status === 404 ? "Dispositivo no encontrado" : "Error en la solicitud");
+    }
+    
+    const data = await res.json();
+    console.log('Waiting status:', data);
+    return data;
+    
+  } catch (error) {
+    console.error('Error en fetchWaitingStatus:', error);
+    throw error;
+  }
+}
+
+export async function fetchMatchStatus(matchId: string): Promise<MatchStatus> {
+  try {
+    const res = await fetch(`${url}matches/${matchId}`);
+    
+    if (!res.ok) {
+      throw new Error(res.status === 404 ? "Partida no encontrada" : "Error en la solicitud");
+    }
+    
+    const data: MatchStatus = await res.json();
+    console.log('Match status:', data);
+    return data;
+    
+  } catch (error) {
+    console.error('Error en fetchMatchStatus:', error);
+    throw error;
+  }
+}
+
+export async function fetchMakeMove(matchId: string, deviceId: string, x: number, y: number) {
+  const payload = {
+    device_id: deviceId,
+    x: x,
+    y: y
+  };
+  
+  const fullUrl = `${url}matches/${matchId}/moves`;
+  
+  console.log('=== MAKING MOVE ===');
+  console.log('Payload:', JSON.stringify(payload, null, 2));
+  
+  try {
+    const res = await fetch(fullUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('❌ Error:', errorText);
+      throw new Error(`Error ${res.status}`);
+    }
+
+    const data = await res.json();
+    console.log('✓ Success');
+    return data;
+
+  } catch (error) {
+    console.error('❌ Fetch error:', error);
+    throw error;
+  }
+}
