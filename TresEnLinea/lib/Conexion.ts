@@ -7,6 +7,16 @@ interface Stats{
   ratio : string;
 }
 
+interface MatchStatus {
+    board: string[][];
+    turn: string;
+    winner: string | null;
+    size: number;
+    players: {
+        [deviceId: string]: string;
+    };
+}
+
 export async function fetchDevice() {
     try {
         const res = await fetch(`${url}devices`);
@@ -49,6 +59,34 @@ export async function fetchStats(id: string): Promise<Stats> {
         return data ;
     } catch (error) {
         console.error('Error', error);
+        throw error;
+    }
+}
+
+export async function fetchSearchMatch(device_id: string, boardSize: number){
+
+    try {
+        const response = await fetch(`${url}matches`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                device_id: device_id,
+                sixe: boardSize
+            })
+        });
+            
+        if (!response.ok) {
+            throw new Error('Error al buscar la partia')
+        }
+
+        const data = await response.json();
+        console.log('Partida encontrada:', data);
+        return data;
+
+    } catch (error) {
+        console.log('Error en fetchSearchMatch:', error);
         throw error;
     }
 }
