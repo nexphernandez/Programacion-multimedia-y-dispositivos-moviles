@@ -27,14 +27,13 @@ export function Board({ squares, onSquareClick, boardSize, winningLine = [] }: B
 
 const styles = StyleSheet.create({
   boardContainer: {
-    width: '90%',
+    width: '100%',
+    height: '100%',
     aspectRatio: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     borderWidth: 2,
     borderColor: '#333',
     backgroundColor: '#fff',
-    touchAction: 'manipulation',
-    userSelect: 'none',
   },
 });

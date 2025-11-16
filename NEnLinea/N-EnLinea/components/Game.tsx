@@ -107,12 +107,14 @@ export function Game({ numero, onBack }: GameProps) {
         <Text style={styles.recordText}>Victorias O: {record.O}</Text>
       </View>
 
-      <Board
-        squares={squares}
-        onSquareClick={handleSquareClick}
-        boardSize={numero}
-        winningLine={winnerInfo?.line || []}
-      />
+      <View style={styles.boardWrapper}>
+        <Board
+          squares={squares}
+          onSquareClick={handleSquareClick}
+          boardSize={numero}
+          winningLine={winnerInfo?.line || []}
+        />
+      </View>
 
       <PlayAgainButton onReset={() => handleReset(true)} />
 
@@ -138,16 +140,44 @@ export function Game({ numero, onBack }: GameProps) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  status: { fontSize: 24, marginBottom: 10 },
-  recordContainer: { flexDirection: 'row', justifyContent: 'space-around', width: '60%', marginBottom: 10 },
-  recordText: { fontSize: 18, color: '#34495e' },
+  container: { 
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    padding: 10,
+  },
+  status: { 
+    fontSize: 20, 
+    marginBottom: 8,
+    fontWeight: '600',
+  },
+  recordContainer: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-around', 
+    width: '60%', 
+    marginBottom: 10,
+  },
+  recordText: { 
+    fontSize: 16, 
+    color: '#34495e',
+    fontWeight: '600',
+  },
+  boardWrapper: {
+    width: '50%',
+    maxWidth: 300,
+    aspectRatio: 1,
+    marginVertical: 10,
+  },
   button: {
     backgroundColor: 'green',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 8,
-    marginTop: 15,
+    marginTop: 10,
   },
-  buttonText: { color: '#fff', fontWeight: 'bold', fontSize: 18 },
+  buttonText: { 
+    color: '#fff', 
+    fontWeight: 'bold', 
+    fontSize: 14,
+  },
 });
