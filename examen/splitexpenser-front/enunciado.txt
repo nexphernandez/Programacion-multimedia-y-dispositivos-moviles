@@ -1,0 +1,39 @@
+
+Descripción.
+
+Demuestra tu capacidad para comunicarte con los endpoints, enviar y recibir JSON válidos, manejar autenticación y gestionar grupos y gastos.
+
+1. Verificación de contraseña
+
+Crea una contraseña segura con:
+
+* Al menos una mayúscula
+* Al menos una minúscula
+* Al menos un número
+* Al menos un símbolo (ej. !, #, $, %, &, ?)
+* Mínimo 8 caracteres
+
+2. Registro e inicio de sesión
+
+Usando los endpoints del módulo auth:
+
+* Registra un usuario (POST /auth/register) con tu nombre de usuario y contraseña verificada.
+* Inicia sesión (POST /auth/login) y comprueba la respuesta de autenticación.
+
+3. Gestión de grupos
+
+Una vez autenticado, crea los componentes para
+
+* Crear un grupo con su nombre.
+* Muestra tus grupos.
+
+
+4. Gestión de gastos
+
+Con un grupo existente:
+
+* Añade un gasto.
+* Modifica un gasto, cambia cantidad o descripción
+* Permite eliminar un gasto.
+
+Debe existir un componente para poder eliminar tu cuenta. Introduce y verifica tu contraseña para la eliminación definitiva.
